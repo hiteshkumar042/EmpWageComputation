@@ -1,6 +1,12 @@
-﻿namespace EmpWageComputation
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EmpWageCompute236Batch
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
@@ -9,12 +15,13 @@
             const int PART_TIME = 2;
             const int EMP_RATE_PER_HR = 20;
             const int MAX_WORKING_DAYS = 20;
-            int empHrs = 0, empWage = 0, totalWage = 0, day = 1;
+            const int MAX_WORKING_HRS = 80;
+            int empHrs = 0,empWage=0,totalWage=0,day=1,totalHrs=0;
 
             //UC-1 Check employee present or not
             Random random = new Random();
 
-            for (day = 1; day <= MAX_WORKING_DAYS; day++)
+            while(day<= MAX_WORKING_DAYS && totalHrs<= MAX_WORKING_HRS)
             {
                 int employeeInput = random.Next(0, 3);
                 //UC-4- Switch case
@@ -33,8 +40,10 @@
                 //UC-2 calculate EmployeeWage
                 empWage = EMP_RATE_PER_HR * empHrs;
                 totalWage += empWage; //totalWage=totalWage+empWage
+                totalHrs += empHrs;
+                day++;
             }
-            Console.WriteLine("Total wage for {0} days:{1}", (day - 1), totalWage);
+            Console.WriteLine("Total wage for {0} days:{1} and Hrs:{2}",(day-1), totalWage,(totalHrs-empHrs));
             Console.ReadLine();
         }
     }
